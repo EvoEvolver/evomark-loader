@@ -4,6 +4,7 @@ var argv = require('minimist')(process.argv.slice(2));
 
 var settings = {
     src: "./docs_src/",
+    watch: true
 }
 
 Object.assign(settings, argv)
@@ -13,7 +14,7 @@ const tempFolderName = '.evomark_ir'
 settings.output = path.normalize(path.resolve(__dirname,"../evomarked-nuxt/"))
 const {createNewFolder} = require('./helper')
 createNewFolder(settings.output+"/pages")
-createNewFolder(settings.output+"/page_assets")
+createNewFolder(settings.output+"/public/page_assets")
 
 settings.src = path.normalize(settings.src)
 
@@ -65,4 +66,5 @@ function compileAll(src) {
 }
 
 compileAll(settings.src)
-watch(settings.src, { recursive: true }, load);
+if(settings.watch===true)
+    watch(settings.src, { recursive: true }, load);
