@@ -1,8 +1,11 @@
 {
+    "name":"evomark-loader",
+    "version": "0.0.1",
     "main": "index.js",
     "license": "MIT",
     "scripts": {},
     "dependencies": {
+        "directory-tree": "^3.0.1",
         "minimist": "^1.2.5",
         "node-dir": "^0.1.17",
         "node-watch": "^0.7.2"

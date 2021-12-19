@@ -23,3 +23,4 @@ module.exports.createNewFolder = function(folderPath){
     }
     fs.mkdirSync(folderPath)
 }
+
