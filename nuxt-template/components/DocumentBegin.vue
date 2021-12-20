@@ -1,17 +1,20 @@
 <template>
   <Html>
     <Head>
-      <Title>{{ pageEnv.title || "Evomark Project" }}</Title>
+      <Title>{{ (pageEnv.title || pageEnv.projectTitle ) || "Evomark Project" }}</Title>
     </Head>
+      <NavBar></NavBar>
   </Html>
 </template>
 
 <script setup>
 import { inject } from 'vue'
 const pageEnv = inject('pageEnv')
-const { data: outerLinkInfo } = await useAsyncData('outerLinkInfo', () => $fetch('/compileEnv.json'), { server: false })
+
+const { data: globalEnv } = await useAsyncData('globalEnv', () => $fetch('/page_assets/globalEnv.json'), { server: false })
 const reactiveEnv = inject("reactiveEnv")
-reactiveEnv.value.outerLinkInfo = outerLinkInfo
+reactiveEnv.value.globalEnv = globalEnv
+
 </script>
 
 <style>

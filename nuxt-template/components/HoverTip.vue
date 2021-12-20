@@ -16,14 +16,23 @@ import 'tippy.js/themes/light.css';
 import 'tippy.js/animations/shift-away.css';
 
 export default {
-  data(){
+  data() {
     return {
       needLoad: true
     }
   },
   props: {
-    interactive:{
-      default:false
+    interactive: {
+      default: false,
+    },
+    placement: {
+      default: "top"
+    },
+    theme: {
+      default: "light"
+    },
+    options: {
+      default: () => { }
     }
   },
   mounted() {
@@ -33,13 +42,15 @@ export default {
   },
   methods: {
     loadTip() {
-      if(!this.needLoad) return
+      if (!this.needLoad) return
       let tippyOption = {
         content: this.$refs.tooltip.cloneNode(true),
-        theme: 'light',
+        theme: this.theme,
         animation: 'shift-away',
+        placement: this.placement
       }
-      if(this.interactive){
+      Object.assign(tippyOption,this.options)
+      if (this.interactive) {
         tippyOption.interactive = true
         tippyOption.appendTo = document.body
       }

@@ -11,34 +11,40 @@ const props = defineProps({
 })
 import { inject, computed } from "vue"
 const reactiveEnv = inject('reactiveEnv')
+
 const matchedPage = computed(() => {
   if (props.page)
     return props.page
-  if (!reactiveEnv.value.outerLinkInfo)
+  if (!reactiveEnv.value.globalEnv)
     return null
 
-  for (let page in reactiveEnv.value.outerLinkInfo) {
-    if (reactiveEnv.value.outerLinkInfo[page].idNames[props.label]) {
+  for (let page in reactiveEnv.value.globalEnv.idNames) {
+    if (reactiveEnv.value.globalEnv.idNames[page][props.label]) {
       return page
     }
   }
 })
 
 const idName = computed(() => {
-  if (!reactiveEnv.value.outerLinkInfo)
+  if (!reactiveEnv.value.globalEnv)
     return "Here"
   let pageDict
   if(props.page)
-    pageDict = reactiveEnv.value.outerLinkInfo[props.page]
+    pageDict = reactiveEnv.value.globalEnv.idNames[props.page]
   else
-    pageDict = reactiveEnv.value.outerLinkInfo[matchedPage.value]
+    pageDict = reactiveEnv.value.globalEnv.idNames[matchedPage.value]
 
   if (!pageDict)
     return "Here"
-  let labelDict = pageDict.idNames[props.label]
+  let labelDict = pageDict[props.label]
   if (!labelDict)
     return "Here"
-  return labelDict.tagName + ": " + labelDict.title
+  // Display the title if there is one
+  if(labelDict.title)
+    return labelDict.tagName + ": " + labelDict.title
+  else
+    return labelDict.tagName + " " + labelDict.index.join(".") +"(other page)"
+
 })
 
 const pageURL = computed(()=>{

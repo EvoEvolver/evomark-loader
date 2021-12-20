@@ -21,13 +21,13 @@
       {{ refInfo.title + " " + refInfo.publish }}
       <HoverTip v-if="refInfo.url">
         <a :href="refInfo.url" target="_blank">
-          <img class="inline-icon" src="../assets/icons/book-alt.svg" />
+          <img class="inline-icon" src="assets/icons/book-alt.svg" />
         </a>
         <template v-slot:tip>Origin Paper</template>
       </HoverTip>
       <HoverTip>
         <a :href="'https://scholar.google.com/scholar?hl=en&q=' + refInfo.title" target="_blank">
-          <img class="inline-icon" src="../assets/icons/graduation-cap.svg" />
+          <img class="inline-icon" src="assets/icons/graduation-cap.svg" />
         </a>
         <template v-slot:tip>Google Scholar</template>
       </HoverTip>
