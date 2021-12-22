@@ -3,9 +3,11 @@
     "version": "0.0.1",
     "main": "index.js",
     "license": "MIT",
-    "scripts": {},
+    "bin": {
+        "em-dev": "./bin/dev.js"
+    },
     "dependencies": {
-        "evomark-it": "git://github.com/EvoEvolver/evomark-it.git",
+        "fs-extra": "^10.0.0",
         "directory-tree": "^3.0.1",
         "minimist": "^1.2.5",
         "node-dir": "^0.1.17",
