@@ -27,7 +27,6 @@ function runCompile(settings) {
             fs.copySync(template_path, settings.output, {
                 overwrite: true, filter: (src, dest) => {
                     let relative_path = path.relative(template_path, src)
-                    console.log(relative_path)
                     if (banned_paths.indexOf(relative_path) >= 0)
                         return false
                     else

@@ -4,7 +4,10 @@
     "main": "index.js",
     "license": "MIT",
     "bin": {
-        "em-dev": "./bin/dev.js"
+        "em-dev": "./bin/dev.js",
+        "em-deploy": "./bin/ssh_deploy.js",
+        "em-build": "./bin/build.js",
+        "em-init": "./bin/init_project.js"
     },
     "dependencies": {
         "fs-extra": "^10.0.0",
@@ -16,5 +19,9 @@
         "nuxt3": "latest",
         "sass": "^1.45.0",
         "toml": "^3.0.0"
+    },
+    "peerDependencies": {
+        "evomark-it": "git://github.com/EvoEvolver/evomark-it.git",
+        "evomarked-nuxt": "git://github.com/EvoEvolver/evomarked-nuxt.git"
     }
 }
