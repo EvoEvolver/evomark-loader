@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-var argv = require('minimist')(process.argv.slice(2));
+var argv = require('minimist')(process.argv.slice(3));
 
 var settings = {
-    src: "./docs_src/",
+    src: process.argv[2] || "./docs_src/",
     watch: true,
     templateDev: false,
     runNuxt: true
