@@ -18,7 +18,7 @@ function runCompile(settings) {
 
 
     let template_path = require.resolve("evomarked-nuxt")//path.join(__dirname, "nuxt-template")
-    template_path = template_path.slice(0,template_path.lastIndexOf("/"))
+    template_path = template_path.slice(0,template_path.lastIndexOf(path.sep))
     
     if (!settings.templateDev) {
         const banned_paths = [".git","pages","public/page_assets",".nuxt"]
@@ -84,7 +84,7 @@ module.exports.runCompile = runCompile
 var child_process = require('child_process');
 function runNuxtDev(settings) {
 
-    var nuxt_dev_server = child_process.spawn("npx", ["nuxi", "dev", settings.output], { encoding: 'utf-8' });
+    var nuxt_dev_server = child_process.spawn("npm", ['exec',"nuxi", "dev", settings.output], { encoding: 'utf-8', shell: true });
     console.log("Working on " + settings.output)
     nuxt_dev_server.stdout.on('data', function (chunk) {
         console.log("[Nuxt] " + chunk.toString());

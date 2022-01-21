@@ -5,14 +5,14 @@ module.exports.createOutputPath = function (filepath, basePath, outputBase, newE
     let relativePath = path.relative(basePath, filepath)
     let outputPath = path.resolve(outputBase, relativePath)
     if (newExtName) outputPath = outputPath.slice(0, outputPath.lastIndexOf(".")) + "." + newExtName
-    fs.mkdirSync(outputPath.slice(0, outputPath.lastIndexOf("/")), { recursive: true }, (err) => {
+    fs.mkdirSync(outputPath.slice(0, outputPath.lastIndexOf(path.sep)), { recursive: true }, (err) => {
         if (err) throw err;
     })
     return outputPath
 }
 
 module.exports.isForbiddenPath = function (filepath) {
-    let splitted = filepath.split("/")
+    let splitted = filepath.split(path.sep)
     for (let item of splitted) {
         if (item[0] == ".")
             return true

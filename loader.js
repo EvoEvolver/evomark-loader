@@ -1,5 +1,6 @@
 const iterateFiles = require('node-dir').files;
 const { isForbiddenPath } = require("./helper")
+const path = require('path')
 
 module.exports.compileAll = function (src, options) {
     iterateFiles(src, function (err, files) {
@@ -25,7 +26,7 @@ function load(evt, name, options) {
     }
 
     let nameEnd = name.length;
-    let filename = name.slice(name.lastIndexOf("/"), nameEnd)
+    let filename = name.slice(name.lastIndexOf(path.sep), nameEnd)
     let extName = name.slice(name.lastIndexOf("."), nameEnd)
     if (filename.slice(0, 2) === "__") return
     let fileLoader = options.loaderMap[extName]
