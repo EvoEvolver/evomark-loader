@@ -16,16 +16,12 @@ function runCommand(cmd, args, cwd, onEnd) {
     });
 }
 
-var argv = require('minimist')(process.argv.slice(2));
-
 var settings = {
-    src: "./docs_src/",
+    src: process.argv[2] || "./docs_src/",
 }
 
-Object.assign(settings, argv)
-
 console.log("building")
-runCommand("yarn",["em-dev","--src",settings.src,"--watch","false"],process.cwd(),()=>{
+runCommand("yarn",["em-dev",settings.src,"--watch","false"],process.cwd(),()=>{
     runCommand("yarn",["install"],settings.src+"/.evomark_ir",()=>{
         runCommand("yarn",["nuxi","build",settings.src+"/.evomark_ir"],process.cwd(),()=>{})
     })

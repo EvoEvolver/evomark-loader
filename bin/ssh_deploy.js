@@ -4,8 +4,8 @@ const toml = require("toml")
 const fs = require("fs")
 const path = require("path")
 
-var argv = require('minimist')(process.argv.slice(2));
-var project_path = argv.src || "."
+//var argv = require('minimist')(process.argv.slice(2));
+var project_path = process.argv[2] || "."
 
 var deploy_config_path = project_path + "/.deploy"
 var config_src = fs.readFileSync(deploy_config_path + "/config.toml", "utf8")
