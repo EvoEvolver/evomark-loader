@@ -24,7 +24,7 @@ module.exports.createNewFolder = function(folderPath){
     
     if(fs.existsSync(folderPath)){
         if(fs.lstatSync(folderPath).isDirectory()){
-            fs.rmdirSync(folderPath, { recursive: true });
+            fs.rmSync(folderPath, { recursive: true });
         }
         else{
             fs.unlinkSync(folderPath)

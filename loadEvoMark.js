@@ -1,5 +1,5 @@
 const path = require('path');
-const mb = new require('evomark-it')()
+const evomark = new require('evomark-it')()
 const fs = require("fs");
 const { createOutputPath } = require('./helper');
 
@@ -8,8 +8,12 @@ module.exports = function loadEvoMark(filepath, basePath, outputBase, globalEnv)
     outputPath = createOutputPath(filepath, basePath, path.join(outputBase, "pages"), "vue")
     let relativePath = path.relative(basePath, filepath)
     env = { basePath: basePath, outputPathPrefix: "/page_assets/" }
-
-    var result = mb.render(fs.readFileSync(filepath, "utf-8"), env);
+    var result 
+    try{
+        result = evomark.render(fs.readFileSync(filepath, "utf-8"), env);
+    }catch(error){
+        result = "<pre><code>"+error.message+"\n"+error.stack+"</code></pre>"
+    }
     var html = [
         "<template><DocumentBegin></DocumentBegin><article>",
         result,
@@ -20,12 +24,10 @@ module.exports = function loadEvoMark(filepath, basePath, outputBase, globalEnv)
         'import { provide } from "vue";\n',
         " let pageEnv=", JSON.stringify(env),
         '\nprovide("pageEnv",pageEnv);\n',
-        'import katex from "katex/dist/katex.mjs";\n',
-        "provide('katexAPI',katex);",
-        "const reactiveEnv = useState('reactiveEnv', () => {return {}});provide('reactiveEnv',reactiveEnv);",
         "\n</script>"])
+    
 
-    fs.writeFile(outputPath, html.join(""), () => { })
+    fs.writeFileSync(outputPath, html.join(""), () => { })
 
     let pageInfo = { sectionList: env.sectionList, title: env.title }
 

@@ -10,14 +10,15 @@
         "em-init": "./bin/init_project.js"
     },
     "dependencies": {
-        "fs-extra": "^10.0.0",
         "directory-tree": "^3.0.1",
+        "fs-extra": "^10.0.0",
         "minimist": "^1.2.5",
         "node-dir": "^0.1.17",
         "node-watch": "^0.7.2",
         "nuxi": "^0.10.1",
         "nuxt3": "latest",
         "sass": "^1.45.0",
+        "sass-loader": "^12.4.0",
         "toml": "^3.0.0"
     },
     "peerDependencies": {

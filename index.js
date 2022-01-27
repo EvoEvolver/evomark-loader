@@ -81,10 +81,10 @@ function runCompile(settings) {
 
 }
 module.exports.runCompile = runCompile
-var child_process = require('child_process');
+const child_process = require('child_process');
 function runNuxtDev(settings) {
 
-    var nuxt_dev_server = child_process.spawn("npm", ['exec',"nuxi", "dev", settings.output], { encoding: 'utf-8', shell: true });
+    const nuxt_dev_server = child_process.spawn("npm", ['exec',"nuxi", "dev", settings.output], { encoding: 'utf-8', shell: true });
     console.log("Working on " + settings.output)
     nuxt_dev_server.stdout.on('data', function (chunk) {
         console.log("[Nuxt] " + chunk.toString());
