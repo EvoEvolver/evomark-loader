@@ -19,7 +19,7 @@ module.exports = function loadEvoMark(filepath, basePath, outputBase, globalEnv)
     var html = [
         "<template><DocumentBegin></DocumentBegin><article>",
         result,
-        "</article><DocumentEnd></DocumentEnd></template>"]
+        "<DocumentEnd></DocumentEnd></article></template>"]
 
     html = html.concat([
         "<script setup>\n",
