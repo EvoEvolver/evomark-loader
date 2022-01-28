@@ -3,7 +3,7 @@ title="A potentially awesome project"
 ---
 
 --- {src:"authorship.toml"} ---
---- {src:"math_config.yml"} ---
+--- {src:"math_config.toml"} ---
 
 === PaperHead ===
 
