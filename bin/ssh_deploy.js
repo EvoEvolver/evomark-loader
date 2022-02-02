@@ -16,7 +16,7 @@ var ssh_key_path = path.join(deploy_config_path, config["ssh_key"])
 var ssh_args = ["-i", ssh_key_path, combined_addr]
 var output_path = path.join(project_path, "/.evomark_ir/.output")
 var deploy_path = config.deploy_path || "~/evomark"
-var scp_args = ["-i", ssh_key_path, "-r", output_path, combined_addr + ":" + deploy_path]
+var scp_args = ["-C","-i", ssh_key_path, "-r", output_path, combined_addr + ":" + deploy_path]
 
 
 const spawn = require('child_process').spawn;

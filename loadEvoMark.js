@@ -10,26 +10,32 @@ module.exports = function loadEvoMark(filepath, basePath, outputBase, globalEnv)
 
     let relativePath = path.relative(basePath, filepath)
     let env = prepareEnv(basePath)
-    var result
+    let result
     try {
         result = evomark.render(fs.readFileSync(filepath, "utf-8"), env);
     } catch (error) {
         result = "<pre><code>" + error.message + "\n" + error.stack + "</code></pre>"
     }
-    var html = [
-        "<template><DocumentBegin></DocumentBegin><article>",
-        result,
-        "<DocumentEnd></DocumentEnd></article></template>"]
 
-    html = html.concat([
-        "<script setup>\n",
-        'import { provide } from "vue";\n',
-        " let pageEnv=", JSON.stringify(env),
-        '\nprovide("pageEnv",pageEnv);\n',
-        "\n</script>"])
+    let html = 
+`<template>
+<div>
+<DocumentBegin></DocumentBegin>
+<article>
+${result}
+<DocumentEnd></DocumentEnd>
+</article>
+</div>
+</template>
+<script setup>
+import { provide } from "vue"
+let pageEnv= ${JSON.stringify(env)}
+provide("pageEnv",pageEnv);
+</script>
+`
 
 
-    fs.writeFileSync(outputPath, html.join(""), () => { })
+    fs.writeFileSync(outputPath, html, () => { })
 
     let pageInfo = { sectionList: env.sectionList, title: env.title }
 
