@@ -9,7 +9,7 @@ module.exports = function loadEvoMark(filepath, basePath, outputBase, globalEnv)
     outputPath = createOutputPath(filepath, basePath, path.join(outputBase, "pages"), "vue")
 
     let relativePath = path.relative(basePath, filepath)
-    let env = prepareEnv(basePath)
+    let env = prepareEnv(basePath,relativePath)
     let result
     try {
         result = evomark.render(fs.readFileSync(filepath, "utf-8"), env);
@@ -45,8 +45,8 @@ provide("pageEnv",pageEnv);
     fs.writeFileSync(outputBase + "/public/page_assets/globalEnv.json", JSON.stringify(globalEnv), () => { })
 }
 
-function prepareEnv(basePath) {
-    let env = { basePath: basePath, outputPathPrefix: "/page_assets/" }
+function prepareEnv(basePath, relativePath) {
+    let env = { basePath: basePath, outputPathPrefix: path.join("/page_assets/",path.dirname(relativePath)) }
     let project_env
     try{
         let raw = fs.readFileSync(path.join(basePath, "project_env.toml"), 'utf-8')
