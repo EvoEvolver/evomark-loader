@@ -16,7 +16,7 @@
         "node-dir": "^0.1.17",
         "node-watch": "^0.7.2",
         "nuxi": "^0.10.1",
-        "nuxt3": "latest",
+        "nuxt": "3.0.0",
         "sass": "^1.45.0",
         "sass-loader": "^12.4.0",
         "toml": "^3.0.0"
